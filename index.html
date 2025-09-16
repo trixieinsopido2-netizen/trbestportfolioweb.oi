@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trixie Insopido - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap');
+        
+        * {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #0a0a0a;
+            overflow-x: hidden;
+        }
+        
+        .playfair { font-family: 'Playfair Display', serif; }
+        .dancing { font-family: 'Dancing Script', cursive; }
+        
+        /* Coquette Background */
+        .coquette-bg {
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255, 182, 193, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(221, 160, 221, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(255, 192, 203, 0.1) 0%, transparent 50%),
+                linear-gradient(135deg, #0a0a0a 0%, #1a0a1a 50%, #2a1a2a 100%);
+        }
+        
+        /* Glowing Effects */
+        .glow-pink { box-shadow: 0 0 20px rgba(255, 182, 193, 0.4), 0 0 40px rgba(255, 182, 193, 0.2); }
+        .glow-purple { box-shadow: 0 0 20px rgba(221, 160, 221, 0.4), 0 0 40px rgba(221, 160, 221, 0.2); }
+        .glow-text-pink { text-shadow: 0 0 10px rgba(255, 182, 193, 0.8), 0 0 20px rgba(255, 182, 193, 0.4); }
+        .glow-text-purple { text-shadow: 0 0 10px rgba(221, 160, 221, 0.8), 0 0 20px rgba(221, 160, 221, 0.4); }
+        
+        /* Holographic Border */
+        .holo-border {
+            position: relative;
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            border: 1px solid transparent;
+            border-radius: 20px;
+        }
+        
+        .holo-border::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            padding: 2px;
+            background: linear-gradient(45deg, #ffb6c1, #dda0dd, #ffc0cb, #ffb6c1);
+            border-radius: inherit;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: xor;
+            animation: rotate 6s linear infinite;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Animations */
+        .float-gentle { animation: floatGentle 6s ease-in-out infinite; }
+        
+        @keyframes floatGentle {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+        
+        .pulse-soft {
+            animation: pulseSoft 4s ease-in-out infinite;
+        }
+        
+        @keyframes pulseSoft {
+            0%, 100% { 
+                box-shadow: 0 0 20px rgba(255, 182, 193, 0.3);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 0 40px rgba(255, 182, 193, 0.6);
+                transform: scale(1.02);
+            }
+        }
+        
+        /* Typing Animation */
+        .typewriter {
+            overflow: hidden;
+            border-right: 3px solid #ffb6c1;
+            white-space: nowrap;
+            animation: typing 3s steps(30, end), blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: #ffb6c1; }
+        }
+        
+        /* Skill Progress */
+        .skill-progress {
+            background: linear-gradient(90deg, #ffb6c1, #dda0dd, #ffc0cb);
+            height: 8px;
+            border-radius: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skill-progress::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            animation: shimmer 3s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        /* 3D Card Effect */
+        .card-3d {
+            transform-style: preserve-3d;
+            transition: transform 0.8s ease;
+        }
+        
+        .card-3d:hover {
+            transform: rotateY(8deg) rotateX(8deg) translateZ(15px);
+        }
+        
+        /* Navigation */
+        .nav-item {
+            position: relative;
+            transition: all 0.4s ease;
+        }
+        
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ffb6c1, #dda0dd);
+            transition: all 0.4s ease;
+            transform: translateX(-50%);
+            border-radius: 10px;
+        }
+        
+        .nav-item:hover::before {
+            width: 100%;
+        }
+        
+        /* Heart Decorations */
+        .heart-decoration {
+            color: #ffb6c1;
+            animation: heartBeat 2s ease-in-out infinite;
+        }
+        
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        /* Button Styles */
+        .btn-coquette {
+            background: linear-gradient(135deg, #ffb6c1, #dda0dd);
+            border: none;
+            border-radius: 25px;
+            padding: 12px 30px;
+            color: white;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-coquette::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-coquette:hover::before {
+            left: 100%;
+        }
+        
+        .btn-coquette:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(255, 182, 193, 0.4);
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #1a0a1a;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #ffb6c1, #dda0dd);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(45deg, #dda0dd, #ffb6c1);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .typewriter {
+                font-size: 1.2rem;
+            }
+            
+            .card-3d:hover {
+                transform: none;
+            }
+        }
+    </style>
+</head>
+<body class="text-white coquette-bg">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-40 bg-black bg-opacity-40 backdrop-filter backdrop-blur-lg border-b border-pink-300 border-opacity-20">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="dancing text-3xl font-bold glow-text-pink pulse-soft">
+                    ✨ Trixie ✨
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="nav-item hover:text-pink-300 transition-colors duration-300">Home</a>
+                    <a href="#about" class="nav-item hover:text-pink-300 transition-colors duration-300">About</a>
+                    <a href="#skills" class="nav-item hover:text-pink-300 transition-colors duration-300">Skills</a>
+                    <a href="#contact" class="nav-item hover:text-pink-300 transition-colors duration-300">Contact</a>
+                </div>
+                <button class="md:hidden text-pink-300" onclick="toggleMobileMenu()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="md:hidden hidden bg-black bg-opacity-90 backdrop-filter backdrop-blur-lg">
+            <div class="px-6 py-4 space-y-4">
+                <a href="#home" class="block hover:text-pink-300 transition-colors duration-300" onclick="toggleMobileMenu()">Home</a>
+                <a href="#about" class="block hover:text-pink-300 transition-colors duration-300" onclick="toggleMobileMenu()">About</a>
+                <a href="#skills" class="block hover:text-pink-300 transition-colors duration-300" onclick="toggleMobileMenu()">Skills</a>
+                <a href="#contact" class="block hover:text-pink-300 transition-colors duration-300" onclick="toggleMobileMenu()">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative">
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <div class="float-gentle">
+                <div class="mb-8">
+                    <div class="inline-block p-6 rounded-full holo-border mb-8">
+                        <div class="w-40 h-40 bg-gradient-to-br from-pink-300 via-purple-300 to-pink-400 rounded-full flex items-center justify-center text-5xl font-bold playfair glow-pink relative">
+                            <span class="absolute inset-0 flex items-center justify-center">TI</span>
+                            <div class="absolute -top-2 -right-2 text-2xl heart-decoration">♡</div>
+                            <div class="absolute -bottom-2 -left-2 text-xl heart-decoration">✨</div>
+                        </div>
+                    </div>
+                </div>
+                <h1 class="playfair text-6xl md:text-8xl font-black mb-4 glow-text-pink">
+                    Trixie Insopido
+                </h1>
+                <div class="dancing text-3xl md:text-4xl mb-6 text-pink-300">
+                    ✨ Future Developer & Data Analyst ✨
+                </div>
+                <div class="text-xl md:text-2xl mb-8 typewriter">
+                    BSIS 2A Student | Coding Enthusiast
+                </div>
+                <p class="text-lg mb-12 max-w-3xl mx-auto text-gray-300 leading-relaxed">
+                    Passionate about creating beautiful, functional code and transforming data into meaningful insights. 
+                    Currently pursuing Bachelor of Science in Information Systems, with dreams of building the future through technology.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-6 justify-center mb-12">
+                    <button onclick="scrollToSection('about')" class="btn-coquette">
+                        <span class="flex items-center justify-center">
+                            <span class="mr-2">💫</span>
+                            Learn More About Me
+                        </span>
+                    </button>
+                    <button onclick="scrollToSection('contact')" class="holo-border px-8 py-4 text-lg font-semibold hover:bg-pink-500 hover:bg-opacity-20 transition-all duration-300">
+                        <span class="flex items-center justify-center">
+                            <span class="mr-2">💌</span>
+                            Get In Touch
+                        </span>
+                    </button>
+                </div>
+                
+                <!-- Live Stats -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+                    <div class="holo-border p-6 text-center">
+                        <div class="text-3xl font-bold text-pink-300 playfair">5+</div>
+                        <div class="text-sm text-gray-400">Projects</div>
+                        <div class="text-2xl mt-2">💻</div>
+                    </div>
+                    <div class="holo-border p-6 text-center">
+                        <div class="text-3xl font-bold text-purple-300 playfair">500+</div>
+                        <div class="text-sm text-gray-400">Study Hours</div>
+                        <div class="text-2xl mt-2">📚</div>
+                    </div>
+                    <div class="holo-border p-6 text-center">
+                        <div class="text-3xl font-bold text-pink-400 playfair">10+</div>
+                        <div class="text-sm text-gray-400">Skills Learned</div>
+                        <div class="text-2xl mt-2">🌟</div>
+                    </div>
+                    <div class="holo-border p-6 text-center">
+                        <div class="text-3xl font-bold text-purple-400 playfair">∞</div>
+                        <div class="text-sm text-gray-400">Cups of Coffee</div>
+                        <div class="text-2xl mt-2">☕</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gradient-to-b from-transparent to-purple-900 bg-opacity-20">
+        <div class="container mx-auto px-6">
+            <h2 class="playfair text-4xl md:text-5xl font-bold text-center mb-16 glow-text-pink">
+                ✨ About Me ✨
+            </h2>
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6">
+                    <div class="holo-border p-8 card-3d">
+                        <h3 class="text-2xl font-bold mb-4 text-pink-300 dancing">My Journey 💫</h3>
+                        <p class="text-lg leading-relaxed mb-4">
+                            Hello! I'm Trixie Insopido, a passionate BSIS 2A student with big dreams and an even bigger love for technology. 
+                            My journey into the world of programming and data analysis started with curiosity and has blossomed into a deep passion.
+                        </p>
+                        <p class="text-lg leading-relaxed mb-4">
+                            I believe that technology should be both powerful and beautiful. Whether I'm writing code, analyzing data, 
+                            or designing user interfaces, I strive to create solutions that are not only functional but also delightful to use.
+                        </p>
+                        <p class="text-lg leading-relaxed">
+                            When I'm not coding, you'll find me exploring new technologies, reading about the latest trends in data science, 
+                            or working on personal projects that challenge me to grow as a developer.
+                        </p>
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <!-- Profile Picture -->
+                    <div class="relative">
+                        <div class="w-80 h-80 mx-auto relative group">
+                            <div class="absolute inset-0 bg-gradient-to-br from-pink-300 via-purple-400 to-pink-500 rounded-full animate-spin" style="animation-duration: 15s;"></div>
+                            <div class="absolute inset-4 bg-gray-900 rounded-full overflow-hidden">
+                                <div class="w-full h-full bg-gradient-to-br from-pink-200 via-purple-200 to-pink-300 flex items-center justify-center relative">
+                                    <svg viewBox="0 0 200 200" class="w-full h-full">
+                                        <!-- Face -->
+                                        <circle cx="100" cy="100" r="80" fill="#FFE4E1" stroke="#FFB6C1" stroke-width="2"/>
+                                        <!-- Hair -->
+                                        <path d="M30 80 Q50 20 100 30 Q150 20 170 80 Q160 40 140 45 Q120 35 100 40 Q80 35 60 45 Q40 40 30 80" fill="#8B4513"/>
+                                        <!-- Eyes -->
+                                        <ellipse cx="75" cy="85" rx="8" ry="12" fill="#000"/>
+                                        <ellipse cx="125" cy="85" rx="8" ry="12" fill="#000"/>
+                                        <ellipse cx="77" cy="82" rx="3" ry="4" fill="#FFF"/>
+                                        <ellipse cx="127" cy="82" rx="3" ry="4" fill="#FFF"/>
+                                        <!-- Blush -->
+                                        <circle cx="55" cy="95" r="8" fill="#FFB6C1" opacity="0.6"/>
+                                        <circle cx="145" cy="95" r="8" fill="#FFB6C1" opacity="0.6"/>
+                                        <!-- Nose -->
+                                        <ellipse cx="100" cy="95" rx="2" ry="3" fill="#FFB6C1"/>
+                                        <!-- Mouth -->
+                                        <path d="M90 110 Q100 120 110 110" stroke="#FF69B4" stroke-width="2" fill="none" stroke-linecap="round"/>
+                                        <!-- Hair bow -->
+                                        <path d="M85 45 Q100 35 115 45 Q100 50 85 45" fill="#FF1493"/>
+                                        <circle cx="100" cy="45" r="3" fill="#FFB6C1"/>
+                                    </svg>
+                                    <div class="absolute inset-0 bg-gradient-to-br from-pink-400 to-purple-400 opacity-0 group-hover:opacity-20 transition-opacity duration-300 rounded-full flex items-center justify-center">
+                                        <div class="text-white text-center">
+                                            <div class="text-2xl mb-1">👋</div>
+                                            <div class="text-sm font-semibold">Hello!</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="absolute -top-4 -right-4 text-3xl heart-decoration">💖</div>
+                            <div class="absolute -bottom-4 -left-4 text-3xl heart-decoration">✨</div>
+                        </div>
+                        
+                        <div class="text-center mt-6">
+                            <div class="dancing text-2xl text-pink-300 mb-2">✨ Trixie Insopido ✨</div>
+                            <div class="text-gray-400 text-sm mb-2">BSIS 2A Student</div>
+                            <div class="flex justify-center space-x-2 text-xs">
+                                <span class="px-2 py-1 bg-pink-500 bg-opacity-20 text-pink-300 rounded-full">💻 Coder</span>
+                                <span class="px-2 py-1 bg-purple-500 bg-opacity-20 text-purple-300 rounded-full">📊 Analyst</span>
+                                <span class="px-2 py-1 bg-pink-400 bg-opacity-20 text-pink-400 rounded-full">🌟 Dreamer</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Personal Info Cards -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="holo-border p-4 text-center">
+                            <div class="text-2xl font-bold text-pink-300">🎓</div>
+                            <div class="text-sm font-semibold">BSIS 2A</div>
+                            <div class="text-xs text-gray-400">Current Student</div>
+                        </div>
+                        <div class="holo-border p-4 text-center">
+                            <div class="text-2xl font-bold text-purple-300">💻</div>
+                            <div class="text-sm font-semibold">Full-Stack</div>
+                            <div class="text-xs text-gray-400">Aspiring Developer</div>
+                        </div>
+                        <div class="holo-border p-4 text-center">
+                            <div class="text-2xl font-bold text-pink-400">📊</div>
+                            <div class="text-sm font-semibold">Data Analysis</div>
+                            <div class="text-xs text-gray-400">Future Analyst</div>
+                        </div>
+                        <div class="holo-border p-4 text-center">
+                            <div class="text-2xl font-bold text-purple-400">🌟</div>
+                            <div class="text-sm font-semibold">Innovation</div>
+                            <div class="text-xs text-gray-400">Focused</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 bg-gradient-to-b from-purple-900 bg-opacity-20 to-black">
+        <div class="container mx-auto px-6">
+            <h2 class="playfair text-4xl md:text-5xl font-bold text-center mb-16 glow-text-purple">
+                💫 Skills & Technologies 💫
+            </h2>
+            
+            <div class="max-w-6xl mx-auto">
+                <!-- Programming Skills -->
+                <div class="mb-12">
+                    <h3 class="text-2xl font-bold mb-8 text-pink-300 dancing text-center">💻 Programming Languages</h3>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="holo-border p-6 card-3d">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-gradient-to-r from-pink-400 to-purple-500 rounded-lg flex items-center justify-center mr-4">
+                                    <span class="text-xl font-bold">PY</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-pink-300">Python</h3>
+                                    <div class="text-sm text-gray-400">Intermediate</div>
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span>Proficiency</span>
+                                    <span>75%</span>
+                                </div>
+                                <div class="w-full bg-gray-700 rounded-full h-2">
+                                    <div class="skill-progress w-[75%] rounded-full"></div>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-400">Data structures, algorithms, and basic web development.</p>
+                        </div>
+                        
+                        <div class="holo-border p-6 card-3d">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-gradient-to-r from-purple-400 to-pink-500 rounded-lg flex items-center justify-center mr-4">
+                                    <span class="text-xl font-bold">JS</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-purple-300">JavaScript</h3>
+                                    <div class="text-sm text-gray-400">Learning</div>
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span>Proficiency</span>
+                                    <span>60%</span>
+                                </div>
+                                <div class="w-full bg-gray-700 rounded-full h-2">
+                                    <div class="skill-progress w-[60%] rounded-full"></div>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-400">DOM manipulation and interactive web features.</p>
+                        </div>
+                        
+                        <div class="holo-border p-6 card-3d">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-gradient-to-r from-pink-400 to-purple-400 rounded-lg flex items-center justify-center mr-4">
+                                    <span class="text-xl font-bold">C++</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-pink-400">C++</h3>
+                                    <div class="text-sm text-gray-400">Beginner</div>
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span>Proficiency</span>
+                                    <span>45%</span>
+                                </div>
+                                <div class="w-full bg-gray-700 rounded-full h-2">
+                                    <div class="skill-progress w-[45%] rounded-full"></div>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-400">Basic syntax, loops, and OOP concepts.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Web Development Skills -->
+                <div class="mb-12">
+                    <h3 class="text-2xl font-bold mb-8 text-purple-300 dancing text-center">🌐 Web Development</h3>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="holo-border p-6 card-3d">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-gradient-to-r from-pink-400 to-purple-500 rounded-lg flex items-center justify-center mr-4">
+                                    <span class="text-sm font-bold">HTML</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-pink-300">HTML5</h3>
+                                    <div class="text-sm text-gray-400">Intermediate</div>
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span>Proficiency</span>
+                                    <span>80%</span>
+                                </div>
+                                <div class="w-full bg-gray-700 rounded-full h-2">
+                                    <div class="skill-progress w-[80%] rounded-full"></div>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-400">Semantic markup and modern HTML5 features.</p>
+                        </div>
+                        
+                        <div class="holo-border p-6 card-3d">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-gradient-to-r from-purple-400 to-pink-500 rounded-lg flex items-center justify-center mr-4">
+                                    <span class="text-sm font-bold">CSS</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-purple-300">CSS3</h3>
+                                    <div class="text-sm text-gray-400">Intermediate</div>
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span>Proficiency</span>
+                                    <span>75%</span>
+                                </div>
+                                <div class="w-full bg-gray-700 rounded-full h-2">
+                                    <div class="skill-progress w-[75%] rounded-full"></div>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-400">Flexbox, Grid, and responsive design.</p>
+                        </div>
+                        
+                        <div class="holo-border p-6 card-3d">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-gradient-to-r from-pink-400 to-purple-400 rounded-lg flex items-center justify-center mr-4">
+                                    <span class="text-sm font-bold">SQL</span>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-bold text-pink-400">SQL</h3>
+                                    <div class="text-sm text-gray-400">Learning</div>
+                                </div>
+                            </div>
+                            <div class="mb-2">
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span>Proficiency</span>
+                                    <span>50%</span>
+                                </div>
+                                <div class="w-full bg-gray-700 rounded-full h-2">
+                                    <div class="skill-progress w-[50%] rounded-full"></div>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-400">Basic queries and database design.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tools & Software -->
+                <div class="mb-12">
+                    <h3 class="text-2xl font-bold mb-8 text-pink-400 dancing text-center">🛠️ Tools & Software</h3>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="holo-border p-4 text-center">
+                            <div class="text-3xl mb-2">💻</div>
+                            <h4 class="font-semibold text-pink-300 mb-1">VS Code</h4>
+                            <p class="text-xs text-gray-400">Code Editor</p>
+                        </div>
+                        <div class="holo-border p-4 text-center">
+                            <div class="text-3xl mb-2">🐙</div>
+                            <h4 class="font-semibold text-purple-300 mb-1">Git & GitHub</h4>
+                            <p class="text-xs text-gray-400">Version Control</p>
+                        </div>
+                        <div class="holo-border p-4 text-center">
+                            <div class="text-3xl mb-2">📊</div>
+                            <h4 class="font-semibold text-pink-400 mb-1">Excel</h4>
+                            <p class="text-xs text-gray-400">Data Analysis</p>
+                        </div>
+                        <div class="holo-border p-4 text-center">
+                            <div class="text-3xl mb-2">🎨</div>
+                            <h4 class="font-semibold text-purple-400 mb-1">Figma</h4>
+                            <p class="text-xs text-gray-400">UI/UX Design</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gradient-to-b from-black to-purple-900 bg-opacity-20">
+        <div class="container mx-auto px-6">
+            <h2 class="playfair text-4xl md:text-5xl font-bold text-center mb-16 glow-text-pink">
+                💌 Let's Connect 💌
+            </h2>
+            <div class="max-w-6xl mx-auto grid lg:grid-cols-2 gap-12">
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-6 text-pink-300 dancing">Let's Create Something Beautiful Together ✨</h3>
+                        <p class="text-lg text-gray-300 mb-8 leading-relaxed">
+                            I'm always excited to connect with fellow students, potential mentors, and anyone who shares my passion for technology! 
+                            Whether you want to collaborate on a project, discuss the latest in tech, or just say hello, I'd love to hear from you.
+                        </p>
+                    </div>
+                    
+                    <!-- Contact Methods -->
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-4 holo-border p-4 hover:bg-pink-500 hover:bg-opacity-10 transition-all duration-300">
+                            <div class="w-12 h-12 bg-gradient-to-r from-pink-400 to-purple-500 rounded-lg flex items-center justify-center">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-pink-300">Email</div>
+                                <div class="text-gray-300">trixie.insopido@student.edu</div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4 holo-border p-4 hover:bg-purple-500 hover:bg-opacity-10 transition-all duration-300">
+                            <div class="w-12 h-12 bg-gradient-to-r from-purple-400 to-pink-500 rounded-lg flex items-center justify-center">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-purple-300">LinkedIn</div>
+                                <div class="text-gray-300">linkedin.com/in/trixie-insopido</div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4 holo-border p-4 hover:bg-pink-500 hover:bg-opacity-10 transition-all duration-300">
+                            <div class="w-12 h-12 bg-gradient-to-r from-pink-500 to-purple-400 rounded-lg flex items-center justify-center">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-pink-400">GitHub</div>
+                                <div class="text-gray-300">github.com/trixie-insopido</div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center space-x-4 holo-border p-4 hover:bg-purple-500 hover:bg-opacity-10 transition-all duration-300">
+                            <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-400 rounded-lg flex items-center justify-center">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-purple-400">Location</div>
+                                <div class="text-gray-300">Philippines (Open to Remote)</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Availability Status -->
+                    <div class="holo-border p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-3 h-3 bg-pink-400 rounded-full mr-3 pulse-soft"></div>
+                            <span class="text-pink-300 font-semibold dancing">Available for Collaborations & Learning Opportunities</span>
+                        </div>
+                        <p class="text-gray-300 text-sm">
+                            Currently seeking internship opportunities, study groups, and exciting projects to work on. 
+                            Always happy to connect with fellow tech enthusiasts!
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+                <div class="holo-border p-8">
+                    <h3 class="text-xl font-bold mb-6 text-purple-300 dancing">Send Me a Message ✨</h3>
+                    <form class="space-y-6" onsubmit="handleContactSubmit(event)">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium mb-2 text-pink-300">Name *</label>
+                                <input type="text" required class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors duration-300 text-white" placeholder="Your Name">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2 text-pink-300">Email *</label>
+                                <input type="email" required class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors duration-300 text-white" placeholder="your@email.com">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2 text-pink-300">Subject</label>
+                            <select class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors duration-300 text-white">
+                                <option>Collaboration Opportunity</option>
+                                <option>Study Group Invitation</option>
+                                <option>Project Discussion</option>
+                                <option>Mentorship</option>
+                                <option>Just Saying Hi!</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2 text-pink-300">Message *</label>
+                            <textarea rows="5" required class="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg focus:border-pink-400 focus:outline-none transition-colors duration-300 text-white" placeholder="Tell me about your idea, project, or just say hello! I'd love to hear from you..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full btn-coquette py-4 text-lg">
+                            <span class="flex items-center justify-center">
+                                <span class="mr-2">💌</span>
+                                Send Message
+                            </span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-black border-t border-pink-300 border-opacity-20">
+        <div class="container mx-auto px-6 text-center">
+            <div class="dancing text-3xl font-bold mb-4 glow-text-pink">✨ Trixie ✨</div>
+            <p class="text-gray-400 mb-4">BSIS 2A Student passionate about creating beautiful, functional technology solutions.</p>
+            <p class="text-gray-500 text-sm dancing">© 2024 Trixie Insopido. Made with 💖 and lots of ☕</p>
+        </div>
+    </footer>
+
+    <script>
+        // Matrix Rain Effect
+        function initMatrixRain() {
+            const matrixContainer = document.getElementById('matrixRain');
+            const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+            
+            function createMatrixChar() {
+                const char = document.createElement('div');
+                char.className = 'matrix-char';
+                char.textContent = chars[Math.floor(Math.random() * chars.length)];
+                char.style.left = Math.random() * 100 + 'vw';
+                char.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                char.style.opacity = Math.random() * 0.8 + 0.2;
+                
+                matrixContainer.appendChild(char);
+                
+                setTimeout(() => {
+                    char.remove();
+                }, 5000);
+            }
+            
+            // Create matrix characters periodically
+            setInterval(createMatrixChar, 100);
+        }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        // Smooth Scrolling
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Contact Form Handler
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            
+            // Show success message
+            const button = event.target.querySelector('button[type="submit"]');
+            const originalText = button.innerHTML;
+            
+            button.innerHTML = '<span class="flex items-center justify-center"><span class="mr-2">✓</span>MESSAGE_SENT_SUCCESSFULLY</span>';
+            button.disabled = true;
+            
+            // Reset form after 3 seconds
+            setTimeout(() => {
+                event.target.reset();
+                button.innerHTML = originalText;
+                button.disabled = false;
+            }, 3000);
+        }
+
+        // Terminal typing effect
+        function typeWriter(element, text, speed = 50) {
+            let i = 0;
+            element.innerHTML = '';
+            
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // Add scroll effect to navigation
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(0, 0, 0, 0.95)';
+            } else {
+                nav.style.background = 'rgba(0, 0, 0, 0.9)';
+            }
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize matrix rain effect
+            initMatrixRain();
+            
+            // Animate sections on scroll
+            const sections = document.querySelectorAll('section');
+            sections.forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(30px)';
+                section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                observer.observe(section);
+            });
+
+            // Add terminal cursor blink to loading elements
+            const loadingElements = document.querySelectorAll('.loading-dots');
+            loadingElements.forEach(element => {
+                setInterval(() => {
+                    element.style.opacity = element.style.opacity === '0.5' ? '1' : '0.5';
+                }, 500);
+            });
+        });
+
+        // Konami Code Easter Egg
+        let konamiCode = [];
+        const konamiSequence = [38, 38, 40, 40, 37, 39, 37, 39, 66, 65]; // ↑↑↓↓←→←→BA
+        
+        document.addEventListener('keydown', function(e) {
+            konamiCode.push(e.keyCode);
+            if (konamiCode.length > konamiSequence.length) {
+                konamiCode.shift();
+            }
+            
+            if (konamiCode.join(',') === konamiSequence.join(',')) {
+                // Easter egg activated!
+                document.body.style.filter = 'hue-rotate(180deg)';
+                setTimeout(() => {
+                    document.body.style.filter = 'none';
+                }, 3000);
+                konamiCode = [];
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'97fe36567434bc55',t:'MTc1ODAwMzE0Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
